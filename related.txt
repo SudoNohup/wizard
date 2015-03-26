@@ -1,0 +1,5 @@
+Learning to Solve Arithmetic Word Problems with Verb Categorization
+Reinforcement learning for mapping instructions to actions
+learning to interpret natural language navigation from observations
+From Natural Language Specifications to Program Input Parsers
+learning to automatically solve algebra word problems
