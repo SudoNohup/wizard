@@ -10,3 +10,5 @@ NLyze: Interactive Programming by Natural Language for SpreadSheet Data Analysis
 Learning to Map Sentences to Logical Form: Structured Classification with Probabilistic Categorial Grammars
 Weakly Supervised Learning of Semantic Parsers for Mapping Instructions to Actions
 Bootstrapping Semantic Parsers from Conversations
+SmartSynth: Synthesizing Smartphone Automation Scripts from Natural Language
+Pegasus – First Steps Toward a Naturalistic Programming Language 
