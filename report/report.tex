@@ -32,94 +32,100 @@
 
 \title{WIZARD:Program Synthesis from Natural Pseudocode}
 
-\author{First Author \\
-  Affiliation / Address line 1 \\
-  Affiliation / Address line 2 \\
-  Affiliation / Address line 3 \\
-  {\tt email@domain} \\\And
-  Second Author \\
-  Affiliation / Address line 1 \\
-  Affiliation / Address line 2 \\
-  Affiliation / Address line 3 \\
-  {\tt email@domain} \\}
+\author{Yu Feng \\
+  UT Austin \\
+  {\tt yufeng@cs.utexas.edu} \\\And
+  Jianyu Huang \\
+  UT Austin \\
+  {\tt jianyu@cs.utexas.edu}  \\\And
+    Yuanru Qian \\
+  UT Austin \\
+  {\tt qyr@cs.utexas.edu} \\}
 
 \date{}
 
 \begin{document}
 \maketitle
 \begin{abstract}
-  This document contains the instructions for preparing a camera-ready
-  manuscript for the proceedings of ACL-2015. The document itself
-  conforms to its own specifications, and is therefore an example of
-  what your manuscript should look like. These instructions should be
-  used for both papers submitted for review and for final versions of
-  accepted papers.  Authors are asked to conform to all the directions
-  reported in this document.
+  Synthesizing the implementation of algorithm based on its 
+  natural description turns out to be a great challenge to both 
+  computational linguistics and programming languages. In this paper,
+  We present WIZARD, a novel system that given a pseudo description 
+  of algorithm in natural language, it learns to synthesize the 
+  implementation of the algorithm.  We demonstrate our tool can effectively
+  map the natural pseudo code to its implementation through the
+  experiment on large samples from TAOCP and wikipedia.
 \end{abstract}
 
 \section{Problem Definition}
+To implement a specific algorithm or procedure, programmers firstly tend to 
+divide it into several steps and write down the key information through
+natural language, and then translate it into source code. However, even 
+with a full description of the algorithm, turning it into its actual 
+implementation is still tedious and error-prone, especially for novices.
 
-This document has been adapted from the instructions for earlier ACL
-proceedings, including those for ACL-2012 by Maggie Li and Michael
-White, those from ACL-2010 by Jing-Shing Chang and Philipp Koehn,
-those for ACL-2008 by Johanna D. Moore, Simone Teufel, James Allan,
-and Sadaoki Furui, those for ACL-2005 by Hwee Tou Ng and Kemal
-Oflazer, those for ACL-2002 by Eugene Charniak and Dekang Lin, and
-earlier ACL and EACL formats. Those versions were written by several
-people, including John Chen, Henry S. Thompson and Donald
-Walker. Additional elements were taken from the formatting
-instructions of the {\em International Joint Conference on Artificial
-  Intelligence}.
+We present WIZARD, an end-to-end system for translating the natural pseudo code
+of an algorithm into its implementation. More specifically,
+our problem can be decomposed into two ingredients: (1) Designing a domain 
+specific language(DSL) to capture the semantic of natural pseudo code; 
+(2) Training a semantic parser through samples from large corpus so that it can
+ map the noisy and ambiguous pseudo code into an intermediate language, which is 
+ formalized through context free grammar. Figure~\ref{fig:convert} shows a 
+ simple example for the input and output of the system: Given a pseudo code like 
+ ``Compute the sum of x and y", WIZARD will generate its Java implementation.
+
   
 \begin{figure}
 \centering
 \includegraphics[scale=0.3]{convert.png}
-\caption{Schematic illustration of the observer pattern}\label{fig:observer}
+\caption{A simple example of synthsizing the psudo code to its Java implementation}\label{fig:convert}
 \end{figure}
 
 
 \section{Methodology}
+We formalize the key idea of our approach through the core language shown in
+figure~\ref{fig:language}.
 
-The following instructions are directed to authors of papers submitted
-to ACL-2015 or accepted for publication in its proceedings. All
-authors are required to adhere to these specifications. Authors are
-required to provide a Portable Document Format (PDF) version of their
-papers. \textbf{The proceedings are designed for printing on A4
-paper.}
+We leverage the KRISP approach(Kate and Mooney, 2006) to model the relation 
+between the node in the pseudo code and the element in the target language.
 
-We will make more detailed instructions available at
-\url{http://acl2015.org/publication.html}. Please check this website 
-regularly.
-
-
-\section{Dataset}
-
-Manuscripts must be in two-column format.  Exceptions to the
-two-column format include the title, authors' names and complete
-addresses, which must be centered at the top of the first page, and
-any full-width figures or tables (see the guidelines in
-Subsection~\ref{ssec:first}). {\bf Type single-spaced.}  Start all
-pages directly under the top margin. See the guidelines later
-regarding formatting the first page.  The manuscript should be
-printed single-sided and its length
-should not exceed the maximum page limit described in Section~\ref{sec:length}.
-Do not number the pages.
-
+ \begin{figure}[t]
+ \small
+\[
+\begin{array}{lll}
+{\rm Program} \ P & := & C^+ \\
+{\rm ClassDecl} \ C & := & {\rm class} \ T_1 \ [{\rm extends} \ T_2]? \ \{F^*; M^*\} \\
+{\rm FieldDecl}  \ F & := & T \  {\rm fld\_name}; \\
+{\rm MethodDecl} \ M & := & m(T_0 \ v_0, \ \ldots, \ T_k \ v_k) = \{ V^*; I; \} \\
+{\rm VarDecl} \ V & := & T \  {\rm var\_name}; \\
+{\rm Instruction} \ I & := & v_1 = v_2 \ | \ v_1 = v_2.f \ | \ v_1.f = v_2 \\
+& & | \ v = {\rm new}^\rho \ T  \ |  \ {\rm if}(*) \ I_1 \ {\rm else} \ I_2 \ | \ I_1; I_2 \\
+& & | \ m^\rho@T(v_1, \ldots, v_n) \ | \ v_0.m^\rho(v_1, \ldots, v_n) 
+\end{array}
+\]
+\vspace{-0.2in}
+\caption{Core language used for our formalization}\label{fig:language}
+\vspace{-0.1in}
+\end{figure}
 
 \section{Evaluation and Metrics}
 
-It is also advised to supplement non-English characters and terms
-with appropriate transliterations and/or translations
-since not all readers understand all such characters and terms.
-Inline transliteration or translation can be represented in
-the order of: original-form transliteration ``translation''.
+\subsection{Dataset}
 
+Our dataset comes from the following sources: (1) Traditional algorithms 
+from textbooks such as TAOCP and CLRS; (2) Mass algorithms from the internet
+ such as Stackoverflow and Wikipedia.  
 
-\section*{Acknowledgments}
+\subsection{Metrics}
+To measure the performance of the system, we mainly focus on the precision of
+the semantic parse tree. Since if the system can turn the pseudo code into 
+its corresponding parse tree in our context free grammar,  we can turn it into 
+the implementation through a syntax directed translation. More specifically,
+we do the followings: (1) Manually write down actual parse tree and check if
+we agree on the output from the system; (2)  Compute the exact match between
+the output of the system and the one from human; (3) Compute the F-score for the
+parse tree, which gives a partial credit to each outcome.
 
-The acknowledgments should go immediately before the references.  Do
-not number the acknowledgments section. Do not include this section
-when submitting your paper for review.
 
 % include your own bib file like this:
 %\bibliographystyle{acl}
