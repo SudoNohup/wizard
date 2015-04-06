@@ -109,16 +109,6 @@ scope slist;
                    locals={$slist::locals}, stats={$slist::stats})
     ;
 
-whileStat
-scope slist;
-@init {
-  $slist::locals = new ArrayList();
-  $slist::stats = new ArrayList();
-}
-    :   'while' '(' e1=expr ')' block
-        -> whileLoop(e1={$e1.st},locals={$slist::locals}, stats={$slist::stats}))
-    ;
-
 assignStat
     :   ID '=' expr -> assign(lhs={$ID.text}, rhs={$expr.st})
     ;
@@ -138,6 +128,9 @@ condExpr
 aexpr
     :   (a=atom -> {$a.st})
         ( '+' b=atom -> add(left={$aexpr.st}, right={$b.st}) )*
+        ( '-' b=atom -> MINUS(left={$aexpr.st}, right={$b.st}) )*
+        ( '*' b=atom -> MULT(left={$aexpr.st}, right={$b.st}) )*
+        ( '/' b=atom -> DIV(left={$aexpr.st}, right={$b.st}) )*
     ;
 
 atom

@@ -1,9 +1,12 @@
-char c;
-int x;
-int foo(int y, char d) {
-  int i;
-  for (i=0; i<3; i=i+1) {
-    x=3;
-    y=5;
-  }
+int gcd(int m, int n) {
+	int r;
+	while (1) {
+		r = m % n;
+		if (r == 0) return n;
+		else {
+			m = n;
+			n = r;
+		}
+	}
 }
+

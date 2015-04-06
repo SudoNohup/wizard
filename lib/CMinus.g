@@ -92,7 +92,12 @@ scope slist;
   $slist::stats = new ArrayList();
 }
     : forStat -> {$forStat.st}
+    | whileStat -> {$whileStat.st}
     | expr ';' -> statement(expr={$expr.st})
+    //| returnStat ';' -> {$returnStat.st}
+    | ifStat -> {$ifStat.st}
+    | elseIfStat -> {$elseIfStat.st}
+    | elseStat -> {$elseStat.st}
     | block -> statementList(locals={$slist::locals}, stats={$slist::stats})
     | assignStat ';' -> {$assignStat.st}
     | ';' -> {new StringTemplate(";")}
@@ -116,8 +121,44 @@ scope slist;
   $slist::stats = new ArrayList();
 }
     :   'while' '(' e1=expr ')' block
-        -> whileLoop(e1={$e1.st},locals={$slist::locals}, stats={$slist::stats}))
+        -> whileLoop(e1={$e1.st},
+                     locals={$slist::locals}, stats={$slist::stats})
     ;
+
+ifStat
+scope slist;
+@init {
+  $slist::locals = new ArrayList();
+  $slist::stats = new ArrayList();
+}
+    :   'if' '(' e1=expr ')' block
+        -> ifClause(e1={$e1.st},
+                     locals={$slist::locals}, stats={$slist::stats})
+    ;
+
+elseIfStat
+scope slist;
+@init {
+  $slist::locals = new ArrayList();
+  $slist::stats = new ArrayList();
+}
+    :   'else' 'if' '(' e1=expr ')' block
+        -> elseIfClause(e1={$e1.st},
+                     locals={$slist::locals}, stats={$slist::stats})
+    ;
+
+elseStat
+scope slist;
+@init {
+  $slist::locals = new ArrayList();
+  $slist::stats = new ArrayList();
+}
+    :   'else' block
+        -> elseClause(locals={$slist::locals}, stats={$slist::stats})
+    ;
+
+//returnStat
+//    :   'return' expr -> {$expr.st}
 
 assignStat
     :   ID '=' expr -> assign(lhs={$ID.text}, rhs={$expr.st})
@@ -138,6 +179,10 @@ condExpr
 aexpr
     :   (a=atom -> {$a.st})
         ( '+' b=atom -> add(left={$aexpr.st}, right={$b.st}) )*
+        ( '-' b=atom -> minus(left={$aexpr.st}, right={$b.st}) )*
+        ( '*' b=atom -> mult(left={$aexpr.st}, right={$b.st}) )*
+        ( '/' b=atom -> div(left={$aexpr.st}, right={$b.st}) )*
+        ( '%' b=atom -> mod(left={$aexpr.st}, right={$b.st}) )*
     ;
 
 atom
@@ -149,8 +194,8 @@ atom
 ID  :   ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'0'..'9'|'_')*
     ;
 
-INT	:	('0'..'9')+
-	;
+INT :   ('0'..'9')+
+    ;
 
 WS  :   (' ' | '\t' | '\r' | '\n')+ {$channel=HIDDEN;}
     ;    
