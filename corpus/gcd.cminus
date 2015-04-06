@@ -1,0 +1,12 @@
+int gcd(int m, int n) {
+  int r;
+  while (1) {
+	r = m % n;
+	if (r == 0) return n;
+	else {
+	  m = n;
+	  n = r;
+	}
+  }
+}
+
