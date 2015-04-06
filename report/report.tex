@@ -93,18 +93,25 @@ between the node in the pseudo code and the element in the target language.
  \small
 \[
 \begin{array}{lll}
-{\rm Program} \ P & := & C^+ \\
-{\rm ClassDecl} \ C & := & {\rm class} \ T_1 \ [{\rm extends} \ T_2]? \ \{F^*; M^*\} \\
-{\rm FieldDecl}  \ F & := & T \  {\rm fld\_name}; \\
-{\rm MethodDecl} \ M & := & m(T_0 \ v_0, \ \ldots, \ T_k \ v_k) = \{ V^*; I; \} \\
+{\rm Program} \ P & := & F^+ \\
+{\rm Function} \ F & := &  f(v_1,...,v_i) = S \\
+{\rm Constraint} \ C & := & S_1 \uplus ... \uplus S_i \\
 {\rm VarDecl} \ V & := & T \  {\rm var\_name}; \\
-{\rm Instruction} \ I & := & v_1 = v_2 \ | \ v_1 = v_2.f \ | \ v_1.f = v_2 \\
-& & | \ v = {\rm new}^\rho \ T  \ |  \ {\rm if}(*) \ I_1 \ {\rm else} \ I_2 \ | \ I_1; I_2 \\
-& & | \ m^\rho@T(v_1, \ldots, v_n) \ | \ v_0.m^\rho(v_1, \ldots, v_n) 
+{\rm Statement} \ S & := & S_1;S_2 | v_1 = v_2 \ | v_1 = v_2 \oplus v_3 \ \\
+& & | \ v_1 = v_2.f \ | \ v_1.f = v_2 \\
+& & | \ v = {\rm new}^\rho \ T  \ \\
+& & |  \ {\rm if}(C) \ I_1 \ {\rm else} \ I_2 \ | while(C) \ do \ S \ \\
+& & | \ m^\rho@T(v_1, \ldots, v_n) \ \\
+& & | \ v_0.m^\rho(v_1, \ldots, v_n) \\
+{\rm Control flow} \ P & := & S_1 \leadsto S_2 \\
+{\rm Data flow} \ P & := & v_i \leadsto a_i \\
+
 \end{array}
 \]
 \vspace{-0.2in}
-\caption{Core language used for our formalization}\label{fig:language}
+\caption{Core language used for our formalization. $\oplus$ denotes 
+binary operations(+/-/*/\%) and $\uplus$ denotes logical 
+operations($<$,$>$,$==$, $\land$ and $\lor$). }\label{fig:language}
 \vspace{-0.1in}
 \end{figure}
 
