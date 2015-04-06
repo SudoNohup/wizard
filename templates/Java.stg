@@ -42,6 +42,34 @@ for (<e1> <e2>; <e3>) {
 }
 >>
 
+whileLoop(e1,locals,stats) ::= <<
+while (<e1>) {
+    <locals; separator="\n">
+    <stats; separator="\n">
+}
+>>
+
+ifClause(e1,locals,stats) ::= <<
+if (<e1>) {
+    <locals; separator="\n">
+    <stats; separator="\n">
+}
+>>
+
+elseIfClause(e1,locals,stats) ::= <<
+else if (<e1>) {
+    <locals; separator="\n">
+    <stats; separator="\n">
+}
+>>
+
+elseClause(locals,stats) ::= <<
+else {
+    <locals; separator="\n">
+    <stats; separator="\n">
+}
+>>
+
 assign(lhs,rhs) ::= "<lhs> = <rhs>;"
 
 equals(left,right) ::= "<left> == <right>"
@@ -49,6 +77,14 @@ equals(left,right) ::= "<left> == <right>"
 lessThan(left,right) ::= "<left> \< <right>"
 
 add(left,right) ::= "<left> + <right>"
+
+minus(left,right) ::= "<left> - <right>"
+
+mult(left,right) ::= "<left> * <right>"
+
+div(left,right) ::= "<left> / <right>"
+
+mod(left,right) ::= "<left> % <right>"
 
 refVar(id) ::= "<id>"
 
