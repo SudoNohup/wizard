@@ -54,7 +54,7 @@
   of algorithm in natural language, it learns to synthesize the 
   implementation of the algorithm.  We demonstrate our tool can effectively
   map the natural pseudo code to its implementation through the
-  experiment on large samples from TAOCP and wikipedia.
+  experiment on large samples from TAOCP~\cite{knuth1998art} and wikipedia.
 \end{abstract}
 
 \section{Problem Definition}
@@ -86,9 +86,6 @@ specific language(DSL) to capture the semantic of natural pseudo code;
 We formalize the key idea of our approach through the core language shown in
 figure~\ref{fig:language}.
 
-We leverage the KRISP approach(Kate and Mooney, 2006) to model the relation 
-between the node in the pseudo code and the element in the target language.
-
  \begin{figure}[t]
  \small
 \[
@@ -114,13 +111,26 @@ binary operations(+/-/*/\%) and $\uplus$ denotes logical
 operations($<$,$>$,$==$, $\land$ and $\lor$). }\label{fig:language}
 \vspace{-0.1in}
 \end{figure}
-
+There are many ways to map the natural pseudo descriptions into our 
+formal intermediate language shown in figure~\ref{fig:language}. 
+Currently we are considering two alternative approaches. The first 
+one is template-based approach similar to~\cite{word}. Specifically,  
+it models the statements in Figure~\ref{fig:language} as a set of templates
+and the problem is reduced to selecting the right templates and alignment.
+Natural language is ambiguous, thus for each set of pseudo descriptions
+in an algorithm $x$, there are multiple derivations $i\in I$. Using a 
+log-linear model, the probability of a specific derivation $i$ given 
+a pseudo description $x$ can be defined as:
+\[
+  p(i|x;\theta) = \frac{e^{\theta \times \phi(x,i)}}{\sum_{i'\in I}{e^{\theta \times \phi(x,i')}}}
+\]
+$\theta$ is the parameter vector of the feature function. 
 \section{Evaluation and Metrics}
 
 \subsection{Dataset}
 
 Our dataset comes from the following sources: (1) Traditional algorithms 
-from textbooks such as TAOCP and CLRS; (2) Mass algorithms from the internet
+from textbooks such as TAOCP~\cite{knuth1998art} and CLRS~\cite{clrs}; (2) Mass algorithms from the internet
  such as Stackoverflow and Wikipedia.  
 
 \subsection{Metrics}
@@ -135,41 +145,7 @@ parse tree, which gives a partial credit to each outcome.
 
 
 % include your own bib file like this:
-%\bibliographystyle{acl}
-%\bibliography{acl2015}
-
-\begin{thebibliography}{}
-
-\bibitem[\protect\citename{Aho and Ullman}1972]{Aho:72}
-Alfred~V. Aho and Jeffrey~D. Ullman.
-\newblock 1972.
-\newblock {\em The Theory of Parsing, Translation and Compiling}, volume~1.
-\newblock Prentice-{Hall}, Englewood Cliffs, NJ.
-
-\bibitem[\protect\citename{{American Psychological Association}}1983]{APA:83}
-{American Psychological Association}.
-\newblock 1983.
-\newblock {\em Publications Manual}.
-\newblock American Psychological Association, Washington, DC.
-
-\bibitem[\protect\citename{{Association for Computing Machinery}}1983]{ACM:83}
-{Association for Computing Machinery}.
-\newblock 1983.
-\newblock {\em Computing Reviews}, 24(11):503--512.
-
-\bibitem[\protect\citename{Chandra \bgroup et al.\egroup }1981]{Chandra:81}
-Ashok~K. Chandra, Dexter~C. Kozen, and Larry~J. Stockmeyer.
-\newblock 1981.
-\newblock Alternation.
-\newblock {\em Journal of the Association for Computing Machinery},
-  28(1):114--133.
-
-\bibitem[\protect\citename{Gusfield}1997]{Gusfield:97}
-Dan Gusfield.
-\newblock 1997.
-\newblock {\em Algorithms on Strings, Trees and Sequences}.
-\newblock Cambridge University Press, Cambridge, UK.
-
-\end{thebibliography}
+\bibliographystyle{acl}
+\bibliography{report}
 
 \end{document}
