@@ -51,8 +51,11 @@
   natural description turns out to be a great challenge to both 
   computational linguistics and programming languages. In this paper,
   We present WIZARD, a novel system that given a pseudo description 
-  of algorithm in natural language, it learns to synthesize the 
-  implementation of the algorithm.  We demonstrate our tool can effectively
+  of algorithm in natural language, it synthesizes the 
+  implementation of the algorithm by training a semantic parser to map
+  the description into its corresponding components and 
+  inferring the missing ``holes" with techniques in program synthesis.  
+  We demonstrate our tool can effectively
   map the natural pseudo code to its implementation through the
   experiment on large samples from TAOCP~\cite{knuth1998art} and wikipedia.
 \end{abstract}
@@ -68,9 +71,18 @@ We present WIZARD, an end-to-end system for translating the natural pseudo code
 of an algorithm into its implementation. More specifically,
 our problem can be decomposed into two ingredients: (1) Designing a domain 
 specific language(DSL) to capture the semantic of natural pseudo code; 
-(2) Training a semantic parser through samples from large corpus so that it can
- map the noisy and ambiguous pseudo code into an intermediate language, which is 
- formalized through context free grammar. Figure~\ref{fig:convert} shows a 
+(2) Train a semantic parser
+ to parse the pseudo descriptions into multiple components as well as their connections. Here a 
+ component corresponds to the basic instructions of our formal language in figure~\ref{fig:language}.
+ A connection can be either control- flow or data- flow;
+ (3) Since natural language is both ambiguous and noisy, we need to infer the missing 
+ components with standard techniques in program synthesis. For the missing component
+ related to function calls, we can leverage the type-based synthesis similar to SmartSynth~\cite{smartsyn}.
+ For other missing ``holes", we could infer them by invoking the off-the-shelf synthesizer:sketch~\cite{sketch};
+ (4) Translate the formal language into the target language(Java) by performing 
+ syntax directed translation. 
+  
+ Figure~\ref{fig:convert} shows a 
  simple example for the input and output of the system: Given a pseudo code like 
  ``Compute the sum of x and y", WIZARD will generate its Java implementation.
 
@@ -84,7 +96,13 @@ specific language(DSL) to capture the semantic of natural pseudo code;
 
 \section{Methodology}
 We formalize the key idea of our approach through the core language shown in
-figure~\ref{fig:language}.
+figure~\ref{fig:language}. 
+ 
+ \begin{figure}
+\centering
+\includegraphics[scale=0.7]{align.pdf}
+\caption{The first sentence in the euclidean algorithm}\label{fig:align}
+\end{figure}
 
  \begin{figure}[t]
  \small
@@ -111,12 +129,13 @@ binary operations(+/-/*/\%) and $\uplus$ denotes logical
 operations($<$,$>$,$==$, $\land$ and $\lor$). }\label{fig:language}
 \vspace{-0.1in}
 \end{figure}
-There are many ways to map the natural pseudo descriptions into our 
+To train a semantic parser so as to map the natural pseudo descriptions into our 
 formal intermediate language shown in figure~\ref{fig:language}. 
-Currently we are considering two alternative approaches. The first 
-one is template-based approach similar to~\cite{word}. Specifically,  
+Our system adopts a template-based approach similar to~\cite{word}. Specifically,  
 it models the statements in Figure~\ref{fig:language} as a set of templates
-and the problem is reduced to selecting the right templates and alignment.
+and the problem is reduced to selecting the right templates and alignment. In figure~\ref{fig:align},
+ the upper part shows the first sentence of the euclidean algorithm and its lower part
+ shows its corresponding template as well as the alignment we need to infer.
 Natural language is ambiguous, thus for each set of pseudo descriptions
 in an algorithm $x$, there are multiple derivations $i\in I$. Using a 
 log-linear model, the probability of a specific derivation $i$ given 
@@ -124,7 +143,12 @@ a pseudo description $x$ can be defined as:
 \[
   p(i|x;\theta) = \frac{e^{\theta \times \phi(x,i)}}{\sum_{i'\in I}{e^{\theta \times \phi(x,i')}}}
 \]
-$\theta$ is the parameter vector of the feature function. 
+where $\theta$ is the parameter vector of the feature function.  To inference
+the correct formal language during test phase, it requires finding the 
+most likely derivation $a$: 
+\[
+f(x) = arg \ max_{a} p(a|x;\theta)
+\]
 \section{Evaluation and Metrics}
 
 \subsection{Dataset}
@@ -134,14 +158,13 @@ from textbooks such as TAOCP~\cite{knuth1998art} and CLRS~\cite{clrs}; (2) Mass 
  such as Stackoverflow and Wikipedia.  
 
 \subsection{Metrics}
-To measure the performance of the system, we mainly focus on the precision of
-the semantic parse tree. Since if the system can turn the pseudo code into 
-its corresponding parse tree in our context free grammar,  we can turn it into 
-the implementation through a syntax directed translation. More specifically,
-we do the followings: (1) Manually write down actual parse tree and check if
-we agree on the output from the system; (2)  Compute the exact match between
-the output of the system and the one from human; (3) Compute the F-score for the
-parse tree, which gives a partial credit to each outcome.
+Since there is no exiting tool on synthesizing pseudo descriptions, we don't have other tool to compare with. 
+To measure the performance of the system, we can evaluate it based on (1) 
+the precision of the semantic parser. More specifically,
+we manually write down the correct parse tree in the form of our formal language 
+and compute the F-score for the parse tree generated by the system. This gives a partial credit to each outcome.
+(2) The correctness of the target program. We can generate the implementation of 
+the algorithm and ask other programmers to grade its quality.
 
 
 % include your own bib file like this:
