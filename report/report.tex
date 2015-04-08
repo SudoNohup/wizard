@@ -61,7 +61,7 @@
 \end{abstract}
 
 \section{Problem Definition}
-To implement a specific algorithm or procedure, programmers firstly tend to 
+To implement a specific algorithm or procedure, programmers first tend to 
 divide it into several steps and write down the key information through
 natural language, and then translate it into source code. However, even 
 with a full description of the algorithm, turning it into its actual 
@@ -70,7 +70,7 @@ implementation is still tedious and error-prone, especially for novices.
 We present WIZARD, an end-to-end system for translating the natural pseudo code
 of an algorithm into its implementation. More specifically,
 our problem can be decomposed into two ingredients: (1) Designing a domain 
-specific language(DSL) to capture the semantic of natural pseudo code; 
+specific language(DSL) to capture the semantics of natural pseudo code; 
 (2) Train a semantic parser
  to parse the pseudo descriptions into multiple components as well as their connections. Here a 
  component corresponds to the basic instructions of our formal language in figure~\ref{fig:language}.
@@ -110,23 +110,24 @@ figure~\ref{fig:language}.
 \begin{array}{lll}
 {\rm Program} \ P & := & F^+ \\
 {\rm Function} \ F & := &  f(v_1,...,v_i) = S \\
-{\rm Constraint} \ C & := & S_1 \uplus ... \uplus S_i \\
+{\rm Constraint} \ C & := & true \ | false \ | v_1 \uplus v_2 \ \\
+& & | C_1 \land C_2  \ | C_1 \lor C_2 \ | \neg C_1\\
 {\rm VarDecl} \ V & := & T \  {\rm var\_name}; \\
 {\rm Statement} \ S & := & S_1;S_2 | v_1 = v_2 \ | v_1 = v_2 \oplus v_3 \ \\
-& & | \ v_1 = v_2.f \ | \ v_1.f = v_2 \\
-& & | \ v = {\rm new}^\rho \ T  \ \\
+%& & | \ v_1 = v_2.f \ | \ v_1.f = v_2 \\
+%& & | \ v = {\rm new}^\rho \ T  \ \\
 & & |  \ {\rm if}(C) \ I_1 \ {\rm else} \ I_2 \ | while(C) \ do \ S \ \\
-& & | \ m^\rho@T(v_1, \ldots, v_n) \ \\
-& & | \ v_0.m^\rho(v_1, \ldots, v_n) \\
-{\rm Control flow} \ P & := & S_1 \leadsto S_2 \\
-{\rm Data flow} \ P & := & v_i \leadsto a_i \\
+%& & | \ m^\rho@T(v_1, \ldots, v_n) \ \\
+%& & | \ v_0.m^\rho(v_1, \ldots, v_n) \\
+%{\rm Control flow} \ P & := & S_1 \leadsto S_2 \\
+%{\rm Data flow} \ P & := & v_i \leadsto a_i \\
 
 \end{array}
 \]
 \vspace{-0.2in}
 \caption{Core language used for our formalization. $\oplus$ denotes 
-binary operations(+/-/*/\%) and $\uplus$ denotes logical 
-operations($<$,$>$,$==$, $\land$ and $\lor$). }\label{fig:language}
+binary operations(+/-/*/\%) and $\uplus$ denotes relational
+operators($<$,$>$,$==$,etc). }\label{fig:language}
 \vspace{-0.1in}
 \end{figure}
 To train a semantic parser so as to map the natural pseudo descriptions into our 
