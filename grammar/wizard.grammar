@@ -4,3 +4,6 @@
 (rule $Partial ($Operator $Expr) (JoinFn forward))
 (rule $Expr ($Expr $Partial) (JoinFn backward))
 (rule $ROOT ((what optional) (is optional) $Expr (? optional)) (IdentityFn))
+(rule $Function (is the answer) (ConstantFn (lambda ret (var ret))))
+(rule $MyRet ($PHRASE $Function) (JoinFn backward))
+(rule $ROOT ($MyRet) (IdentityFn))

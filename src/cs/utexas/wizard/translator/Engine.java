@@ -31,7 +31,9 @@ public class Engine {
 		builder.parser = null;
 		builder.buildUnspecified();
 
-		String query = "three plus four";
+		// reture stmt.
+		String query = "n is the answer";
+		// query = "two plus one";
 		Example.Builder b = new Example.Builder();
 		b.setUtterance(query);
 		Example ex = b.createExample();
