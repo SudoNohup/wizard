@@ -1,5 +1,8 @@
 package cs.utexas.wizard.translator;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import edu.stanford.nlp.sempre.Builder;
 import edu.stanford.nlp.sempre.Example;
 import edu.stanford.nlp.sempre.LanguageAnalyzer;
@@ -32,16 +35,28 @@ public class Engine {
 		builder.buildUnspecified();
 
 		// reture stmt.
-		String query = "n is the answer";
+		String query1 = "n is the answer";
+		// equal: n == 0
+		String query2 = "n is 0";
+		
+		// if-stmt
+		String query3 = "if n is 0, n is the answer";
+		
+		List<String> queryList = new LinkedList<String>();
+		queryList.add(query1);
+		queryList.add(query2);
+		queryList.add(query3);
 		// query = "two plus one";
-		Example.Builder b = new Example.Builder();
-		b.setUtterance(query);
-		Example ex = b.createExample();
+		for (String query : queryList) {
+			Example.Builder b = new Example.Builder();
+			b.setUtterance(query);
+			Example ex = b.createExample();
 
-		ex.preprocess(LanguageAnalyzer.getSingleton());
+			ex.preprocess(LanguageAnalyzer.getSingleton());
 
-		// Parse!
-		builder.parser.parse(builder.params, ex, false);
-	    LogInfo.logs("Derivation: %s", ex.predDerivations);
+			// Parse!
+			builder.parser.parse(builder.params, ex, false);
+			LogInfo.logs("Derivation: %s", ex.predDerivations);
+		}
 	}
 }

@@ -7,3 +7,9 @@
 (rule $Function (is the answer) (ConstantFn (lambda ret (var ret))))
 (rule $MyRet ($PHRASE $Function) (JoinFn backward))
 (rule $ROOT ($MyRet) (IdentityFn))
+
+
+(rule $EqFn (is) (ConstantFn (lambda y (lambda x (call .indexOf (var x) (var y))))))
+(rule $Partial ($EqFn $Expr) (JoinFn forward))
+(rule $EqStmt ($PHRASE $Partial) (JoinFn backward))
+(rule $ROOT ((if optional) $EqStmt) (IdentityFn))
