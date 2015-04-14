@@ -1,5 +1,10 @@
 package cs.utexas.wizard.translator;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -7,12 +12,16 @@ import edu.stanford.nlp.sempre.Builder;
 import edu.stanford.nlp.sempre.Derivation;
 import edu.stanford.nlp.sempre.Example;
 import edu.stanford.nlp.sempre.LanguageAnalyzer;
+import edu.stanford.nlp.sempre.StringValue;
+import edu.stanford.nlp.sempre.Value;
 import fig.basic.LogInfo;
 
 public class Engine {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws FileNotFoundException, IOException {
 
+		String srcPath = "./corpus/gcd.txt";
+		File src = new File(srcPath);
 		String gPath = "./grammar/wizard.grammar";
 
 		Builder builder = new Builder();
@@ -52,13 +61,39 @@ public class Engine {
 			if (!ex.predDerivations.isEmpty()) {
 				succ++;
 
-				for (Derivation dev : ex.predDerivations) {
-					LogInfo.log("Dev result-----------: " + dev.getValue());
-				}
+				// dump all.
+				// for (Derivation dev : ex.predDerivations) {
+				// LogInfo.log("Dev result-----------: " + dev.getValue());
+				// }
+
+				StringValue sv = (StringValue) pickLongest(ex.predDerivations);
+				LogInfo.log("Dev result-----------: " + sv.value);
 			}
 		}
 		
 		LogInfo.log("Success: " + succ + "/" + queryList.size());
+		
+		try (BufferedReader br = new BufferedReader(new FileReader(src))) {
+		    String line;
+		    while ((line = br.readLine()) != null) {
+		       // process the line.
+		    	LogInfo.log(line);
+		    }
+		}
+	}
+	
+	static Value pickLongest(List<Derivation> list) {
+		int max = 0;
+		Derivation can = null;
+		for(Derivation dev : list) {
+			int len = dev.getValue().toString().length();
+			if(len > max) {
+				max = len; 
+				can = dev;
+			}
+		}
+		assert can.getValue() instanceof StringValue : can.getValue();
+		return can.getValue();
 	}
 	
 	final static String[] testSet = { "m mod n",
