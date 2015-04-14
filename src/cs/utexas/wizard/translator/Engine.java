@@ -1,6 +1,6 @@
 package cs.utexas.wizard.translator;
 
-import java.util.LinkedList;
+import java.util.Arrays;
 import java.util.List;
 
 import edu.stanford.nlp.sempre.Builder;
@@ -34,20 +34,10 @@ public class Engine {
 		builder.parser = null;
 		builder.buildUnspecified();
 
-		// reture stmt.
-		String query1 = "n is the answer";
-		// equal: n == 0
-		String query2 = "n is 0";
-		
-		// if-stmt
-		String query3 = "if n is 0, n is the answer";
-		
-		List<String> queryList = new LinkedList<String>();
-		queryList.add(query1);
-		queryList.add(query2);
-		queryList.add(query3);
+		List<String> queryList = Arrays.asList(testSet);
 		// query = "two plus one";
 		for (String query : queryList) {
+			LogInfo.logs("Parse query----------%s", query);
 			Example.Builder b = new Example.Builder();
 			b.setUtterance(query);
 			Example ex = b.createExample();
@@ -59,4 +49,11 @@ public class Engine {
 			LogInfo.logs("Derivation: %s", ex.predDerivations);
 		}
 	}
+	
+	final static String[] testSet = { "Divide m by n",
+			"Divide m by n and let r be the remainder", "r is 0", "r is not 0",
+			"n is the answer", "if r is 0", "if r is 0", "if r is not 0",
+			"if r is 0, n is the answer", "continue to step 3",
+			"if r is not 0, continue to step 3.", "m = n",
+			"Set m = n and n = r.", "Go back to step 1." };
 }
