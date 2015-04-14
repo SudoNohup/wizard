@@ -1,5 +1,7 @@
 (rule $returnFn (is the answer) (ConstantFn (lambda x (call cs.utexas.wizard.translator.WizardFn.returnStmt (var x)))))
 (rule $Stmt ($TOKEN $returnFn) (JoinFn backward))
+(rule $Wh ($TOKEN) (ConstantFn null))
+(rule $Stmt ($Wh $Stmt) (SelectFn 1))
 
 (rule $condExprEqFn (is) (ConstantFn (lambda lhs (lambda rhs (call cs.utexas.wizard.translator.WizardFn.condExprEq (var lhs) (var rhs))))))
 (rule $partialStmt ($TOKEN $condExprEqFn) (JoinFn backward))
@@ -19,4 +21,22 @@
 (rule $partialAssignStmt ($TOKEN $assignFn) (JoinFn backward))
 (rule $Stmt ($partialAssignStmt $TOKEN) (JoinFn forward))
 
-(rule $ROOT ($Stmt) (IdentityFn))
+(rule $Remain (be the remainder) (ConstantFn null))
+(rule $rhs ($TOKEN $Remain) (SelectFn 0)) 
+(rule $assignFn (and let) (ConstantFn (lambda lhs (lambda rhs (call cs.utexas.wizard.translator.WizardFn.assignStmt (var lhs) (var rhs))))))
+(rule $partialAssignStmt ($assignFn $rhs) (JoinFn forward))
+(rule $Stmt ($Stmt $partialAssignStmt) (JoinFn backward))
+
+(rule $modFn (mod) (ConstantFn (lambda lhs (lambda rhs (call cs.utexas.wizard.translator.WizardFn.aExprMod (var lhs) (var rhs))))))
+(rule $partialModStmt ($TOKEN $modFn) (JoinFn backward))
+(rule $Stmt ($partialModStmt $TOKEN) (JoinFn forward))
+
+(rule $andFn (and) (ConstantFn (lambda lhs (lambda rhs (call cs.utexas.wizard.translator.WizardFn.andStmt (var lhs) (var rhs))))))
+(rule $partialAndStmt ($Stmt $andFn) (JoinFn backward))
+(rule $Stmt ($partialAndStmt $Stmt) (JoinFn forward))
+
+(rule $andFn (,) (ConstantFn (lambda lhs (lambda rhs (call cs.utexas.wizard.translator.WizardFn.andStmt (var lhs) (var rhs))))))
+(rule $partialAndStmt ($Stmt $andFn) (JoinFn backward))
+(rule $Stmt ($partialAndStmt $Stmt) (JoinFn forward))
+
+(rule $ROOT ((Set optional) $Stmt (. optional)) (IdentityFn))

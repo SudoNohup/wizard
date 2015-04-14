@@ -20,8 +20,16 @@ public class WizardFn {
 	public static String gotoStmt(String expr) {
 		return "goto " + expr;
 	}
-	
+
 	public static String assignStmt(String lhs, String rhs) {
 		return "(" + lhs + "=" + rhs + ")";
+	}
+
+	public static String aExprMod(String lhs, String rhs) {
+		return "(" + lhs + "%" + rhs + ")";
+	}
+	
+	public static String andStmt(String lhs, String rhs) {
+		return "(" + lhs + ";" + rhs + ")";
 	}
 }

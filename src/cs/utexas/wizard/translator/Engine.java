@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import edu.stanford.nlp.sempre.Builder;
+import edu.stanford.nlp.sempre.Derivation;
 import edu.stanford.nlp.sempre.Example;
 import edu.stanford.nlp.sempre.LanguageAnalyzer;
 import fig.basic.LogInfo;
@@ -48,17 +49,22 @@ public class Engine {
 			// Parse!
 			builder.parser.parse(builder.params, ex, false);
 			LogInfo.logs("Derivation: %s", ex.predDerivations);
-			if(!ex.predDerivations.isEmpty())
+			if (!ex.predDerivations.isEmpty()) {
 				succ++;
+
+				for (Derivation dev : ex.predDerivations) {
+					LogInfo.log("Dev result-----------: " + dev.getValue());
+				}
+			}
 		}
 		
 		LogInfo.log("Success: " + succ + "/" + queryList.size());
 	}
 	
-	final static String[] testSet = { "Divide m by n",
-			"Divide m by n and let r be the remainder", "r is 0", "r is not 0",
-			"n is the answer", "if r is 0", "if r is 0", "if r is not 0",
+	final static String[] testSet = { "m mod n",
+			"m mod n and let r be the remainder", "r is 0", "r is not 0",
+			"n is the answer", "if r is 0", "if r is not 0",
 			"if r is 0, n is the answer", "continue to step 3",
 			"if r is not 0, continue to step 3.", "m = n",
-			"Set m = n and n = r.", "Go back to step 1" };
+			"m = n and n = r.", "Go back to step 1" };
 }

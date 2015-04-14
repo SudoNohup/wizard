@@ -1,0 +1,3 @@
+(rule $Function (length of) (ConstantFn (lambda x (call .length (var x)))))
+(rule $Expr ($Function $PHRASE) (JoinFn forward))
+(rule $ROOT ($Expr) (IdentityFn))
