@@ -2,7 +2,7 @@ package cs.utexas.wizard.translator;
 
 public class WizardFn {
 	public static String returnStmt(String x) {
-		return "(return " + x + ")";
+		return "return " + x;
 	}
 
 	public static String condExprEq(String lhs, String rhs) {
@@ -22,14 +22,14 @@ public class WizardFn {
 	}
 
 	public static String assignStmt(String lhs, String rhs) {
-		return "(" + lhs + "=" + rhs + ")";
+		return lhs + "=" + rhs;
 	}
 
 	public static String aExprMod(String lhs, String rhs) {
-		return "(" + lhs + "%" + rhs + ")";
+		return lhs + "%" + rhs;
 	}
 	
 	public static String andStmt(String lhs, String rhs) {
-		return "(" + lhs + ";" + rhs + ")";
+		return lhs + ";" + rhs;
 	}
 }
