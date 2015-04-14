@@ -36,6 +36,7 @@ public class Engine {
 
 		List<String> queryList = Arrays.asList(testSet);
 		// query = "two plus one";
+		int succ = 0;
 		for (String query : queryList) {
 			LogInfo.logs("Parse query----------%s", query);
 			Example.Builder b = new Example.Builder();
@@ -47,7 +48,11 @@ public class Engine {
 			// Parse!
 			builder.parser.parse(builder.params, ex, false);
 			LogInfo.logs("Derivation: %s", ex.predDerivations);
+			if(!ex.predDerivations.isEmpty())
+				succ++;
 		}
+		
+		LogInfo.log("Success: " + succ + "/" + queryList.size());
 	}
 	
 	final static String[] testSet = { "Divide m by n",

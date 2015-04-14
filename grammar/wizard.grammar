@@ -15,4 +15,8 @@
 (rule $gotoFn ($TOKEN to step) (ConstantFn (lambda x (call cs.utexas.wizard.translator.WizardFn.gotoStmt (var x)))))
 (rule $Stmt ($gotoFn $TOKEN) (JoinFn forward))
 
+(rule $assignFn (=) (ConstantFn (lambda lhs (lambda rhs (call cs.utexas.wizard.translator.WizardFn.assignStmt (var lhs) (var rhs))))))
+(rule $partialAssignStmt ($TOKEN $assignFn) (JoinFn backward))
+(rule $Stmt ($partialAssignStmt $TOKEN) (JoinFn forward))
+
 (rule $ROOT ($Stmt) (IdentityFn))
