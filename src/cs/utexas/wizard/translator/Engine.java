@@ -60,5 +60,5 @@ public class Engine {
 			"n is the answer", "if r is 0", "if r is 0", "if r is not 0",
 			"if r is 0, n is the answer", "continue to step 3",
 			"if r is not 0, continue to step 3.", "m = n",
-			"Set m = n and n = r.", "Go back to step 1." };
+			"Set m = n and n = r.", "Go back to step 1" };
 }

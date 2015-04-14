@@ -12,7 +12,7 @@ public class Main {
 	String templateFileName;
 	int a = 0;
 	if ( args.length<=1 ) {
-		templateFileName = "templates/Java.stg";
+		templateFileName = "templates/Python.stg";
 	}
 	else {
 		templateFileName = args[a];
