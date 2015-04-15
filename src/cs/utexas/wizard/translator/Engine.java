@@ -64,6 +64,7 @@ public class Engine {
 				String num = line.substring(0, 1);
 				String stmt = line.substring(3, line.length());
 				sb.append("line " + num + "\n");
+				// break it into multiple sentences.
 				if (stmt.contains("; ")) {
 					String[] sub = stmt.split("; ");
 					for (int i = 0; i < sub.length; i++) {

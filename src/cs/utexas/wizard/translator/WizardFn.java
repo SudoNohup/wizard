@@ -30,6 +30,6 @@ public class WizardFn {
 	}
 	
 	public static String andStmt(String lhs, String rhs) {
-		return lhs + ";" + rhs;
+		return lhs + "\n" + rhs;
 	}
 }
