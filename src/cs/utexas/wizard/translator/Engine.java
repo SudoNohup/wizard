@@ -18,17 +18,20 @@ import fig.basic.LogInfo;
 
 public class Engine {
 
-	public static void main(String[] args) throws FileNotFoundException, IOException {
+	Builder builder = new Builder();
 
-		String srcPath = "./corpus/gcd.txt";
-		File src = new File(srcPath);
+	public static void main(String[] args) {
+		new Engine().run();
+	}
+
+	private void run() {
+
 		String gPath = "./grammar/wizard.grammar";
 
-		Builder builder = new Builder();
 		builder.build();
 		builder.grammar.read(gPath);
 
-		// This is used for learning based. 
+		// This is used for learning based.
 		// Dataset dataset = new Dataset();
 		// dataset.read();
 		//
@@ -44,62 +47,100 @@ public class Engine {
 		builder.parser = null;
 		builder.buildUnspecified();
 
+		testFromBuffer();
+
+		testFromFile();
+
+	}
+
+	private void testFromFile() {
+		String srcPath = "./corpus/gcd.txt";
+		File src = new File(srcPath);
+		try (BufferedReader br = new BufferedReader(new FileReader(src))) {
+			String line;
+			StringBuilder sb = new StringBuilder();
+			while ((line = br.readLine()) != null) {
+				// process the line.
+				String num = line.substring(0, 1);
+				String stmt = line.substring(3, line.length());
+				sb.append("line " + num + "\n");
+				if (stmt.contains("; ")) {
+					String[] sub = stmt.split("; ");
+					for (int i = 0; i < sub.length; i++) {
+						String res = parse(sub[i]);
+						sb.append(res);
+					}
+				} else if (stmt.contains(".")) {
+					String[] sub = stmt.split("\\.");
+					for (int i = 0; i < sub.length; i++) {
+						String res = parse(sub[i]);
+						sb.append(res);
+					}
+				}
+			}
+			LogInfo.log("Program: \n" + sb.toString());
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void testFromBuffer() {
 		List<String> queryList = Arrays.asList(testSet);
 		// query = "two plus one";
 		int succ = 0;
 		for (String query : queryList) {
 			LogInfo.logs("Parse query----------%s", query);
-			Example.Builder b = new Example.Builder();
-			b.setUtterance(query);
-			Example ex = b.createExample();
-
-			ex.preprocess(LanguageAnalyzer.getSingleton());
-
-			// Parse!
-			builder.parser.parse(builder.params, ex, false);
-			LogInfo.logs("Derivation: %s", ex.predDerivations);
-			if (!ex.predDerivations.isEmpty()) {
+			String res = parse(query);
+			if (!res.equals("")) {
 				succ++;
-
-				// dump all.
-				// for (Derivation dev : ex.predDerivations) {
-				// LogInfo.log("Dev result-----------: " + dev.getValue());
-				// }
-
-				StringValue sv = (StringValue) pickLongest(ex.predDerivations);
-				LogInfo.log("Dev result-----------: " + sv.value);
+				LogInfo.log("Dev result-----------: " + res);
 			}
 		}
-		
+
 		LogInfo.log("Success: " + succ + "/" + queryList.size());
-		
-		try (BufferedReader br = new BufferedReader(new FileReader(src))) {
-		    String line;
-		    while ((line = br.readLine()) != null) {
-		       // process the line.
-		    	LogInfo.log(line);
-		    }
-		}
 	}
-	
-	static Value pickLongest(List<Derivation> list) {
+
+	private String parse(String query) {
+		StringBuilder sb = new StringBuilder();
+		Example.Builder b = new Example.Builder();
+		b.setUtterance(query);
+		Example ex = b.createExample();
+
+		ex.preprocess(LanguageAnalyzer.getSingleton());
+
+		// Parse!
+		builder.parser.parse(builder.params, ex, false);
+		LogInfo.logs("Derivation: %s", ex.predDerivations);
+		if (!ex.predDerivations.isEmpty()) {
+			StringValue sv = (StringValue) pickLongest(ex.predDerivations);
+			String dump = sv.value;
+			sb.append(dump);
+			sb.append("\n");
+		}
+		return sb.toString();
+	}
+
+	private Value pickLongest(List<Derivation> list) {
 		int max = 0;
 		Derivation can = null;
-		for(Derivation dev : list) {
+		for (Derivation dev : list) {
 			int len = dev.getValue().toString().length();
-			if(len > max) {
-				max = len; 
+			if (len > max) {
+				max = len;
 				can = dev;
 			}
 		}
 		assert can.getValue() instanceof StringValue : can.getValue();
 		return can.getValue();
 	}
-	
+
 	final static String[] testSet = { "m mod n",
 			"m mod n and let r be the remainder", "r is 0", "r is not 0",
 			"n is the answer", "if r is 0", "if r is not 0",
 			"if r is 0, n is the answer", "continue to step 3",
-			"if r is not 0, continue to step 3.", "m = n",
-			"m = n and n = r.", "Go back to step 1" };
+			"if r is not 0, continue to step 3.", "m = n", "m = n and n = r.",
+			"Go back to step 1" };
 }
