@@ -14,3 +14,4 @@ SmartSynth: Synthesizing Smartphone Automation Scripts from Natural Language
 Pegasus – First Steps Toward a Naturalistic Programming Language 
 Bringing machine learning and compositional semantics together
 Semantic Parsing using Distributional Semantics and Probabilistic Logic
+Learning for Semantic Parsing with Statistical Machine Translation
