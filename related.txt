@@ -3,7 +3,6 @@ Reinforcement learning for mapping instructions to actions
 learning to interpret natural language navigation from observations
 From Natural Language Specifications to Program Input Parsers
 learning to automatically solve algebra word problems
-From Natural Language Specifications to Program Input Parsers
 http://www.pegasus-project.org/en/Demos___Screenshots.html
 Integrating Programming by Example and Natural Language Programming
 NLyze: Interactive Programming by Natural Language for SpreadSheet Data Analysis and Manipulation
