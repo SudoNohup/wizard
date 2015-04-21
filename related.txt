@@ -14,6 +14,7 @@ Pegasus – First Steps Toward a Naturalistic Programming Language
 Bringing machine learning and compositional semantics together
 Semantic Parsing using Distributional Semantics and Probabilistic Logic
 Learning for Semantic Parsing with Statistical Machine Translation
+Learning Context-dependent Mappings from Sentences to Logical Form (for multiple sentences)
 
 http://www.cs.utexas.edu/~ml/wasp/geo-funql.html
 http://www.cs.utexas.edu/~ml/wasp/robocup-clang.html
