@@ -4,7 +4,7 @@ statement
 			| IF condition THEN statement
 			| WHILE condition DO statement
 			| jump_statement
-			| CALL IDENTIFIER 
+			| CALL "(" (IDENTIFIER)+ ")" 
 			
 condition  
 			: expression
