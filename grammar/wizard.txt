@@ -1,0 +1,31 @@
+statement 
+			:IDENTIFIER ":=" expression 
+			| statement ; statement 
+			| IF condition THEN statement
+			| WHILE condition DO statement
+			| jump_statement
+			| CALL IDENTIFIER 
+			
+condition  
+			: expression
+			| expression ("==" | "!=" | "<" | ">" | "<=" | ">=" | "&&" | "||") expression
+
+expression    
+			: term {(+/-/*/\//%)} term
+			  
+term  
+			: IDENTIFIER
+			| NUMBER
+			| "(" expression ")"
+			
+jump_statement
+				: GOTO IDENTIFIER
+				| RETURN expression	
+				
+IDENTIFIER	
+			: ((a-z)|(A-Z))+
+			| IDENTIFIER "[" term "]"		
+			
+NUMBER
+			: (0-9)+
+						
