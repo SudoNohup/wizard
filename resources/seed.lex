@@ -112,3 +112,4 @@ are  :- (NP\N)/(NP/N)  : (lambda $0:<<e,t>,e> $0)
 with  :- (NP\N)/(NP/N)  : (lambda $0:<<e,t>,e> $0)
 //add by yufeng
 with :- (S\NP)/NP : (lambda $0:e (lambda $1:e (assign:<e,<e,t>> $1 $0)))
+assign :- S/S : (lambda $0:<e,t> $0)
