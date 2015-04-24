@@ -1,2 +1,2 @@
-assign i with 8
-(assign:<e,<e,t>> i:id 8:i)
+assign y to x
+(assign:<e,t> (backward:<e,<e,e>> y:id x:id))

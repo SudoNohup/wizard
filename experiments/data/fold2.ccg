@@ -1,2 +1,2 @@
-assign z with 1
-(assign:<e,<e,t>> z:id 1:i)
+assign 1 to z
+(assign:<e,t> (backward:<e,<e,e>> 1:i z:id))

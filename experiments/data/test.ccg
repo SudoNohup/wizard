@@ -1,2 +1,2 @@
 assign z with 9
-(assign:<e,<e,t>> z:id 9:i)
+(assign:<e,t> (forward:<e,<e,e>> z:id 9:i))

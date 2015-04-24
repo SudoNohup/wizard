@@ -111,5 +111,9 @@ is :- (NP\N)/(NP/N)  : (lambda $0:<<e,t>,e> $0)
 are  :- (NP\N)/(NP/N)  : (lambda $0:<<e,t>,e> $0)
 with  :- (NP\N)/(NP/N)  : (lambda $0:<<e,t>,e> $0)
 //add by yufeng
-with :- (S\NP)/NP : (lambda $0:e (lambda $1:e (assign:<e,<e,t>> $1 $0)))
-assign :- S/S : (lambda $0:<e,t> $0)
+//with :- (S\NP)/NP : (lambda $0:e (lambda $1:e (assign:<e,<e,t>> $1 $0)))
+//assign :- S/S : (lambda $0:<e,t> $0)
+assign :- S/NP : (lambda $0:e (assign:<e,t> $0))
+with :- (NP/NP)\NP : (lambda $0:e (lambda $1:e (forward:<e,<e,e>> $0 $1)))
+to :- (NP/NP)\NP : (lambda $0:e (lambda $1:e (backward:<e,<e,e>> $0 $1)))
+
