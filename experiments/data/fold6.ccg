@@ -1,2 +1,2 @@
-assign i with 8
-(assign:<e,t> (forward:<e,<e,e>> i:id 8:i))
+assign x with 3
+(assign:<e,<e,t>> x:id 3:i)

@@ -39,8 +39,6 @@ len:<r,i>
 major:<lo,t>
 in:<lo,<lo,t>>
 
-assign:<e,t>
-forward:<e,<e,e>>
-backward:<e,<e,e>>
+assign:<e,<e,t>>
 
 )

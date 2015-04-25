@@ -1,2 +1,2 @@
 assign y to x
-(assign:<e,t> (backward:<e,<e,e>> y:id x:id))
+(assign:<e,<e,t>> x:id y:id)
