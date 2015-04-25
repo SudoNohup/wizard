@@ -1,2 +1,2 @@
 assign y with 2
-(assign:<e,<e,t>> y:id 2:i)
+(assign:<e,<e,e>> y:id 2:i)

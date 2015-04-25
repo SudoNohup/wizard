@@ -111,10 +111,15 @@ is :- (NP\N)/(NP/N)  : (lambda $0:<<e,t>,e> $0)
 are  :- (NP\N)/(NP/N)  : (lambda $0:<<e,t>,e> $0)
 with  :- (NP\N)/(NP/N)  : (lambda $0:<<e,t>,e> $0)
 //add by yufeng
-assign :- (S/NP)/PP : (lambda $0:e (lambda $1:e (assign:<e,<e,t>> $1 $0)))
-assign :- (S/PP)/NP : (lambda $0:e (lambda $1:e (assign:<e,<e,t>> $0 $1)))
+assign :- (S/NP)/PP : (lambda $0:e (lambda $1:e (assign:<e,<e,e>> $1 $0)))
+assign :- (S/PP)/NP : (lambda $0:e (lambda $1:e (assign:<e,<e,e>> $0 $1)))
 
 with :- PP/NP : (lambda $0:e $0)
 to :- PP\NP : (lambda $0:e $0)
+
+equalcmp :- (S\NP)/NP : (lambda $0:e (lambda $1:e (equalcmp:<e,<e,e>> $1 $0)))
+if :- (S/S)/S : (lambda $0:e (lambda $1:e (if:<e,<e,t>> $0 $1)))
+if :- (S\S)/S : (lambda $0:e (lambda $1:e (if:<e,<e,t>> $0 $1)))
+
 
 

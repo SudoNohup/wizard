@@ -1,2 +1,2 @@
 assign x with 3
-(assign:<e,<e,t>> x:id 3:i)
+(assign:<e,<e,e>> x:id 3:i)

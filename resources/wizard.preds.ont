@@ -39,6 +39,9 @@ len:<r,i>
 major:<lo,t>
 in:<lo,<lo,t>>
 
-assign:<e,<e,t>>
+assign:<e,<e,e>>
+
+equalcmp:<e,<e,e>>
+if:<e,<e,t>>
 
 )

@@ -1,2 +1,12 @@
 assign z with 9
-(assign:<e,t> (forward:<e,<e,e>> z:id 9:i))
+(assign:<e,e> (forward:<e,<e,e>> z:id 9:i))
+
+x equalcmp 1
+(equalcmp:<e,<e,e>> x:id 1:i)
+
+
+if x equalcmp 1 assign x with y
+(if:<e,<e,t>> (equalcmp:<e,<e,e>> x:id 1:i)  (assign:<e,<e,e>> x:id y:id) )
+
+assign x with y if x equalcmp 1 
+(if:<e,<e,t>> (equalcmp:<e,<e,e>> x:id 1:i)  (assign:<e,<e,e>> x:id y:id) )

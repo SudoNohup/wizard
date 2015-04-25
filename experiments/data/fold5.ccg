@@ -1,2 +1,2 @@
 assign i with 4
-(assign:<e,<e,t>> i:id 4:i)
+(assign:<e,<e,e>> i:id 4:i)
