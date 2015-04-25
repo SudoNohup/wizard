@@ -14,4 +14,15 @@
 
 //identifier
 (id e)
+(expr e)
+(stmt e)
+(block e)
+(logicExpr expr)
+(relExpr expr)
+(jmpStmt stmt)
+(assignStmt stmt)
+(ifStmt stmt)
+(loopStmt stmt)
+(loadStmt stmt)
+(storeStmt stmt)
 )
