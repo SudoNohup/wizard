@@ -1,2 +1,26 @@
 assign y with 2
 (assign:<e,<e,e>> y:id 2:i)
+
+divide x by y
+(div:<e,<e,expr>> x:id y:id)
+
+x plus y
+(plus:<e,<e,expr>> x:id y:id)
+
+x minus y
+(minus:<e,<e,expr>> x:id y:id)
+
+x times y
+(times:<e,<e,expr>> x:id y:id)
+
+x equals to z
+(eq:<e,<e,relExpr>> x:id y:id)
+
+x is greater than y
+(gt:<e,<e,relExpr>> x:id y:id)
+
+x is less than y
+(lt:<e,<e,relExpr>> x:id y:id)
+
+return x as the answer
+(ret:<e,jmpStmt> x:id)

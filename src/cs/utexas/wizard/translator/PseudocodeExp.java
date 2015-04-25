@@ -277,8 +277,8 @@ public class PseudocodeExp {
 		// //////////////////////////////////////////////////
 		
 		final List<IDataCollection<? extends SingleSentence>> folds = new ArrayList<IDataCollection<? extends SingleSentence>>(
-				1);
-		for (int i = 0; i < 1; ++i) {
+				10);
+		for (int i = 0; i < 10; ++i) {
 			System.out.println("yufeng: " + i);
 			folds.add(SingleSentenceDataset.read(
 					new File(dataDir, String.format("fold%d.ccg", i)),

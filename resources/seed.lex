@@ -122,5 +122,17 @@ equals to :- (S\NP)/NP : (lambda $0:e (lambda $1:e (equalcmp:<e,<e,e>> $1 $0)))
 if :- (S/S)/S : (lambda $0:e (lambda $1:e (if:<e,<e,t>> $0 $1)))
 if :- (S\S)/S : (lambda $0:e (lambda $1:e (if:<e,<e,t>> $0 $1)))
 
+//binary operations
+
+//logical operations
+
+//relation operations
+
+//jump statements
+
+//while statement
+
+//if statement
+
 
 

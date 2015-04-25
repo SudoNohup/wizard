@@ -44,4 +44,16 @@ assign:<e,<e,e>>
 equalcmp:<e,<e,e>>
 if:<e,<e,t>>
 
+div:<e,<e,expr>>
+plus:<e,<e,expr>>
+minus:<e,<e,expr>>
+times:<e,<e,expr>>
+
+eq:<e,<e,relExpr>>
+gt:<e,<e,relExpr>>
+lt:<e,<e,relExpr>>
+
+ret:<e,jmpStmt>
+
+
 )
