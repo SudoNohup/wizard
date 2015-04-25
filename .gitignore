@@ -1,2 +1,7 @@
 /wizard/nbproject/private/
 /build/
+*~
+*.swp
+*.mf
+build.xml
+bin/*
