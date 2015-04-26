@@ -16,3 +16,8 @@ return z as the result
 x times 2
 (times:<e,<e,expr>> x:id 2:i)
 
+//let r be the remainder of m divide n
+//(assign:<e,<e,e>> r:id (mod:<e,<e,expr>> m:id n:id))
+
+
+

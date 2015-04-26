@@ -2,7 +2,7 @@ assign 9 to x
 (assign:<e,<e,e>> x:id 9:i)
 
 assign z with 9
-(assign:<e,e> (forward:<e,<e,e>> z:id 9:i))
+(assign:<e,<e,e>> z:id 9:i)
 
 y equals to 3
 (equalcmp:<e,<e,e>> x:id 3:i)

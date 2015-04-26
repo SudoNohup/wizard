@@ -51,8 +51,10 @@ Given a string, return a string made of the first 2 chars (if present), however 
 Given 2 int values, return true if they are both in the range 30..40 inclusive, or they are both in the range 40..50 inclusive. 
 
 Return true if the given string contains between 1 and 3 'e' chars. 
+(if:<relExpr,<expr,t>> (cotains:<expr,<expr,t>> s:string e:char) (ret:<e,jmpStmt> true:t)) 
 
 Given 2 int values, return whichever value is nearest to the value 10, or return 0 in the event of a tie. Note that Math.abs(n) returns the absolute value of a number. 
+
 
 Return true if the given string begins with "mix", except the 'm' can be anything, so "pix", "9ix" .. all count. 
 
