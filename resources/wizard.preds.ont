@@ -42,7 +42,7 @@ in:<lo,<lo,t>>
 assign:<e,<e,e>>
 
 equalcmp:<e,<e,e>>
-if:<e,<e,t>>
+if:<expr,<block,e>>
 
 div:<e,<e,expr>>
 plus:<e,<e,expr>>

@@ -8,7 +8,7 @@ y equals to 3
 (equalcmp:<e,<e,e>> x:id 3:i)
 
 if x equals to 4 assign x with y
-(if:<e,<e,t>> (equalcmp:<e,<e,e>> x:id 4:i)  (assign:<e,<e,e>> x:id y:id) )
+(if:<expr,<block,e>> (equalcmp:<e,<e,e>> x:id 4:i)  (assign:<e,<e,e>> x:id y:id) )
 
 assign x with y if x equals to 1 
-(if:<e,<e,t>> (equalcmp:<e,<e,e>> x:id 1:i)  (assign:<e,<e,e>> x:id y:id) )
+(if:<expr,<block,e>> (equalcmp:<e,<e,e>> x:id 1:i)  (assign:<e,<e,e>> x:id y:id) )

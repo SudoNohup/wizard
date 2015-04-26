@@ -15,8 +15,8 @@
 //identifier
 (id e)
 (expr e)
-(stmt e)
 (block e)
+(stmt block)
 (logicExpr expr)
 (relExpr expr)
 (jmpStmt stmt)
