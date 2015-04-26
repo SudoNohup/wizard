@@ -1,4 +1,41 @@
-//Return true if the given non-negative number x is a multiple of 3 or a multiple of 5.
+Return true if the given non-negative number x is a multiple of 3 or a multiple of 5.
+(if:<expr,<block,e>> (or:<e*,relExpr> (multiple:<e,<e,relExpr>> x:id 3:i) (multiple:<e,<e,relExpr>> x:id 3:id)))
+
+//Given two int values, return their sum. Unless the two values are the same, then return double their sum.
+Return the sum of integer values x and y.
+(ret:<e,jmpStmt> (plus:<e,<e,e>> x:id y:id))
+
+//Given 2 ints, a and b, return true if one of them is 10 or if their sum is 10. 
+Given 2 ints, a and b, return true if a is 10 or the sum of a and b is 10.
+(if:<expr,<block,e>> (or:<e*,relExpr> (eq:<e,<e,relExpr>> a:id 10:i) (eq:<e,<e,relExpr>> (sum:<e*,e> a:id b:id) 10:i)) (ret:<e, jmpExpr> true:t)
+
+Given three int values, a b c, return the largest of them. 
+(ret:<e,jmpStmt> (max<e*,e> a:id b:id c:id))
+
+Return true if the given string contains 'e' char. 
+(if:<relExpr,<expr,e>> (cotains:<expr,<expr,t>> s:string e:char) (ret:<e,jmpStmt> true:t)) 
+
+Given three ints, a b c, return true if b is greater than a, and c is greater than b. 
+(ret:<e,jmpStmt> (plus:<e,<e,e>> x:id y:id))
+
+Given a string, return true if it ends in "ly". 
+
+Given an array A of ints length 3, return the sum of all the elements. 
+(ret:<e,jmpStmt> (sum:<array,e> A:array))
+
+Given an int n, return true if it is within 10 of 100 or 200.
+
+Given a string, return true if the string starts with "hi" and false otherwise. 
+
+Given two temperatures a, b, return true if one is less than 0 and the other is greater than 100. 
+
+Given two non-negative int values, return true if they have the same last digit, such as with 27 and 57. 
+
+Given 2 int values, return true if they are both in the range 30..40 inclusive, or they are both in the range 40..50 inclusive. 
+
+Given 2 int values, return true if either of them is in the range 10..20 inclusive. 
+
+
 
 //Given two int values x and y, return their sum. Unless the two values are the same, then return double their sum.
 
@@ -7,18 +44,6 @@
 //Given an int n, return the absolute difference between n and 21, except return double the absolute difference if n is over 21. 
 
 //Given an int n, return true if it is within 10 of 100 or 200. Note: Math.abs(num) computes the absolute value of a number. 
-
-//Given a string, return true if the string starts with "hi" and false otherwise. 
-
-//Given two temperatures, return true if one is less than 0 and the other is greater than 100. 
-
-//Given two non-negative int values, return true if they have the same last digit, such as with 27 and 57. 
-
-//Given 2 int values, return true if they are both in the range 30..40 inclusive, or they are both in the range 40..50 inclusive. 
-
-//Given 2 ints, a and b, return true if one of them is 10 or if their sum is 10. 
-
-//Given two int values, return their sum. Unless the two values are the same, then return double their sum.
 
 //We'll say that a number is "teen" if it is in the range 13..19 inclusive. Given 3 int values, return true if 1 or more of them are teen. 
 
@@ -32,9 +57,10 @@
 
 //Given 2 positive int values, return the larger value that is in the range 10..20 inclusive, or return 0 if neither is in that range. 
 
-//Given three int values, a b c, return the largest. 
 
-//Given 2 int values, return true if either of them is in the range 10..20 inclusive. 
+
+
+
 
 //We have two monkeys, a and b, and the parameters aSmile and bSmile indicate if each is smiling. We are in trouble if they are both smiling or if neither of them is smiling. Return true if we are in trouble. 
 
@@ -48,7 +74,7 @@ We'll say that a number is "teen" if it is in the range 13..19 inclusive. Given 
 
 Given a string, return a string made of the first 2 chars (if present), however include first char only if it is 'o' and include the second only if it is 'z', so "ozymandias" yields "oz". 
 
-Given 2 int values, return true if they are both in the range 30..40 inclusive, or they are both in the range 40..50 inclusive. 
+
 
 Return true if the given string contains between 1 and 3 'e' chars. 
 (if:<relExpr,<expr,t>> (cotains:<expr,<expr,t>> s:string e:char) (ret:<e,jmpStmt> true:t)) 
@@ -88,13 +114,16 @@ Given a non-negative number "num", return true if num is within 2 of a multiple 
 
 Given three ints, a b c, return true if it is possible to add two of the ints to get the third. 
 
-Return true if the given non-negative number is a multiple of 3 or 5, but not both. 
+Return true if the given non-negative number x is a multiple of 3 or 5, but not both. 
+(if:<expr<block,t>> (and:<t*,t> (multiple<e,<e,) (not:<t,t> )) (ret:<expr,jmpStmt> true:expr))
 
 Given 2 ints, a and b, return their sum. However, "teen" values in the range 13..19 inclusive, are extra lucky. So if either value is a teen, just return 19. 
 
 Given three ints, a b c, return true if b is greater than a, and c is greater than b. However, with the exception that if "bOk" is true, b does not need to be greater than a. 
 
+//reference...
 Given three ints, a b c, return true if one of them is 10 or more less than one of the others.
+
 
 Given two ints, each in the range 10..99, return true if there is a digit that appears in both numbers, such as the 2 in 12 and 23
 
@@ -108,11 +137,13 @@ Given an array of ints, return true if 6 appears as either the first or last ele
 
 Given 2 arrays of ints, a and b, return true if they have the same first element or they have the same last element. 
 
-Given an array of ints length 3, return a new array with the elements in reverse order.
+Given an array of A ints length 3, return a new array with the elements in reverse order.
+(ret:<e,jmpStmt> (reverse:<array,e> A:array))
 
 Given 2 int arrays, a and b, each length 3, return a new array length 2 containing their middle elements. 
 
 Given an int array length 2, return true if it does not contain a 2 or 3. 
+(if:<expr,<block,e>> (cotains:<expr,<expr,t>> s:string e:char) (ret:<e,jmpStmt> true:expr)) 
 
 Given an int array length 3, if there is a 2 in the array immediately followed by a 3, set the 3 element to 0. Return the changed array. 
 
@@ -121,8 +152,6 @@ Given an array of ints of even length, return a new array length 2 containing th
 We'll say that a 1 immediately followed by a 3 in an array is an "unlucky" 1. Return true if the given array contains an unlucky 1 in the first 2 or last 2 positions in the array. 
 
 Given an array of ints, return true if the array is length 1 or more, and the first element and the last element are equal. 
-
-Given an array of ints length 3, return the sum of all the elements. 
 
 Given an array of ints length 3, figure out which is larger between the first and last elements in the array, and set all the other elements to be that value. Return the changed array.
  
@@ -143,8 +172,6 @@ Given a string name, e.g. "Bob", return a greeting of the form "Hello Bob!".
 Given a string of even length, return the first half. So the string "WooHoo" yields "Woo". 
 
 Given 2 strings, return their concatenation, except omit the first char of each. The strings will be at least length 1. 
-
-Given a string, return true if it ends in "ly". 
 
 Given a string, if the string begins with "red" or "blue" return that color string, otherwise return the empty string. 
 
