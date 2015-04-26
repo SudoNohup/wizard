@@ -25,5 +25,11 @@ x times by 2
 x plus 2
 (times:<e,<e,expr>> x:id 2:i)
 
-Given a string x, return true if x ends in "ly". 
-(ret:<e,jmpStmt> (endsWith:<e,<e,e>> x:id "ly":str))
+x equals to 1 and y equals to 2
+(and:<e*,relExpr> (eq:<e,<e,relExpr>> x:id 1:i) (eq:<e,<e,relExpr>> y:id 2:i))
+
+//x equals to 1 or z equals to 2
+(or:<e*,relExpr> (eq:<e,<e,relExpr>> x:id 1:i) (eq:<e,<e,relExpr>> z:id 2:i))
+
+//Given a string x, return true if x ends in "ly". 
+//(ret:<e,jmpStmt> (endsWith:<e,<e,e>> x:id "ly":str))

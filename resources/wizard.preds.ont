@@ -56,6 +56,11 @@ le:<e,<e,relExpr>>
 
 ret:<e,jmpStmt>
 
+//connectors.
+and:<e*,relExpr>
+or:<e*,relExpr>
+neg:<e,relExpr>
+
 //function calls
 endsWith:<e,<e,e>>
 startsWith:<e,<e,e>>

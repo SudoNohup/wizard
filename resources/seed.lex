@@ -127,6 +127,9 @@ times :- (S\NP)/NP : (lambda $0:e (lambda $1:e (times:<e,<e,expr>> $1 $0)))
 
 
 //logical operations
+and :- (S\S)/S : (lambda $0:e (lambda $1:e (and:<e*,relExpr> $1 $0)))
+or :- (S\S)/S : (lambda $0:e (lambda $1:e (or:<e*,relExpr> $1 $0)))
+not :- S/S : (lambda $0:e (neg:<e,relExpr> $0))
 
 //relation operations
 
@@ -138,6 +141,7 @@ times :- (S\NP)/NP : (lambda $0:e (lambda $1:e (times:<e,<e,expr>> $1 $0)))
 
 //APIs
 ends in :- (NP\NP)/NP : (lambda $0:e (lambda $1:e (endsWith:<e,<e,e>> $1 $0)))
+
 
 //composition rules
 
