@@ -24,3 +24,6 @@ x is less than y
 
 return x as the answer
 (ret:<e,jmpStmt> x:id)
+
+x plus z
+(times:<e,<e,expr>> x:id z:id)

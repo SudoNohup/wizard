@@ -123,6 +123,8 @@ if :- (S/S)/S : (lambda $0:e (lambda $1:e (if:<e,<e,t>> $0 $1)))
 if :- (S\S)/S : (lambda $0:e (lambda $1:e (if:<e,<e,t>> $0 $1)))
 
 //binary operations
+times :- (S\NP)/NP : (lambda $0:e (lambda $1:e (times:<e,<e,expr>> $1 $0)))
+
 
 //logical operations
 
