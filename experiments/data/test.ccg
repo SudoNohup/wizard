@@ -154,6 +154,94 @@ Given a string, return true if "bad" appears starting at index 0 or 1 in the str
 
 Given a string, return true if the first 2 chars in the string also appear at the end of the string
 
+//TAOCP:
 
+Given two nonnegative arrays v and u, both of length n. Set j = n, k = 0.
+
+Set w[j] = (u[j] + v[j] + k) mod b, and k = floor((u[j] + v[j] + k)/b).
+
+Decrease j by one. Now if j > 0, go back to step A2; otherwise set w[0] = k and terminate the algorithm.
+
+Given two nonnegative arrays v and u, both of length n. Set j = n, k = 0.
+
+Set w[j] = (u[j] - v[j] + k) mod b, and k = floor((u[j] - v[j] + k)/b).
+
+Decrease j by one. Now if j > 0, go back to step S2; otherwise terminate the algorithm.
+
+Set w[m + 1], w[m + 2], . . . , w[m + n] all to zero. Set j = m.
+
+If v[j] = 0, set w[j] = 0 and go to step M6.
+
+Set i = n, k = 0.
+
+Set t = u[i] * v[j] + w[i + j] + k; then set w[i + j] = t mod b and k = floor(t / b).
+
+Decrease i by one. Now if i > 0, go back to step M4; otherwise set w[j] = k.
+
+Decrease j by one. Now if j > 0, go back to step M2; otherwise the algorithm terminates.
+
+Given two integers A and C greater than unity , this algorithm finds their greatest common divisor. If C divides A, the algorithm terminates with C as the answer.
+
+If A mod C is equal to unity , the given numbers were relatively prime , so the algorithm terminates . Otherwise replace the pair of values (A, C) by ( C, A mod C ) and return to step E1.
+
+Given nonnegative integers u and V, this algorithm finds their greatest common divisor. If v = 0, the algorithm terminates with u as the answer.
+
+Set r = u mod v, u = v, v = r, and return to A1.
+
+Given positive integers u and v. Set k = 0, and then repeatedly k = k + 1, u = u / 2, v = v / 2, zero or more times until u and v are not both even.
+
+If u is odd, set t = -v, and go to B4. Otherwise set t = u.
+
+Set t = t / 2.
+
+If t is even, go back to B3.
+
+If t > 0, set u = t; otherwise set v = -t.
+
+Set t = u - v. If t != 0, go back to B3. Otherwise the algorithm terminates with pow(u * 2, k) as the output.
+
+Set t = 0, k = 0, n = N. 
+
+If n = 1, the algorithm terminates.
+
+Set q = floor(n / d[k]), r = n mod d[k].
+
+If r != 0, go to step A6.
+
+Increase t by 1, and set p[t] = d[k], n = q. Return to step A2.
+
+If q > d[k], increase k by 1 and return to step A3.
+
+Increase t by 1, set p[t] = n, and terminate the algorithm.
+
+Set j = -1, s = 0, and set COUNT[r] = 0 for d <= r <= t.
+
+Set q = 0, t = 0, and set OCCURS[k] = 0 for 0 <= k < d.
+
+Increase r and j by 1. If OCCURS[Y[j]] != 0, repeat this step.
+
+Set OCCURS[Y[j]] = 1 and q = q + 1. If q < d, return to step C3.
+
+If r > t, increase COUNT[t] by one, otherwise increase COUNT[r] by one.
+
+Increase s by one. If s < n, return to step C2.
+
+Set j = -1, s = 0, and set COUNT[r] = 0 for 0 <= r <= t.
+
+Set r = 0.
+
+Increase j by 1. If U[j] <= a and U[j] < b, go to step G5.
+
+Increase r by one, and return to step G3.
+
+If r <= t, increase COUNT[t] by one, otherwise increase COUNT[r] by one.
+
+Increase s by one. If s < n, return to step G2.
+
+Set k = 0
+
+If n = 0, terminate
+
+Increase k by 1 and return to S2
 
  
