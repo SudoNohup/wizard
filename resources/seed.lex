@@ -35,7 +35,7 @@ named :- PP/NP : (lambda $0:e (lambda $1:e (named:<e,<n,t>> $1 $0)))
 
 //adjective
 major :- N/N : (lambda $0:<e,t> (lambda $1:e (and:<t*,t> ($0 $1) (major:<lo,t> $1))))
-texas :- N/N : (lambda $0:<e,t> (lambda $1:e (and:<t*,t> ($0 $1) (loc:<lo,<lo,t>> $1 texas:s))))
+//texas :- N/N : (lambda $0:<e,t> (lambda $1:e (and:<t*,t> ($0 $1) (loc:<lo,<lo,t>> $1 texas:s))))
 
 // for eliptical sentences such as "states bordering texas"
 states :- S/(S\NP) : (lambda $0:<e,t> (lambda $1:e (and:<t*,t> (state:<s,t> $1) ($0 $1))))
