@@ -2,13 +2,13 @@ assign x with y
 (assign:<e,<e,e>> x:id y:id)
 
 x equals to 1
-(equalcmp:<e,<e,e>> x:id 1:i)
+(eq:<e,<e,relExpr>> x:id 1:i)
 
 if x equals to 1 assign x with y
-(if:<expr,<block,e>> (equalcmp:<e,<e,e>> x:id 1:i)  (assign:<e,<e,e>> x:id y:id) )
+(if:<expr,<block,e>> (eq:<e,<e,relExpr>> x:id 1:i)  (assign:<e,<e,e>> x:id y:id) )
 
 assign x with y if x equals to 1 
-(if:<expr,<block,e>> (equalcmp:<e,<e,e>> x:id 1:i)  (assign:<e,<e,e>> x:id y:id) )
+(if:<expr,<block,e>> (eq:<e,<e,relExpr>> x:id 1:i)  (assign:<e,<e,e>> x:id y:id) )
 
 return z as the result
 (ret:<e,jmpStmt> z:id)
@@ -24,3 +24,6 @@ x times by 2
 
 x plus 2
 (times:<e,<e,expr>> x:id 2:i)
+
+Given a string x, return true if x ends in "ly". 
+(ret:<e,jmpStmt> (endsWith:<e,<e,e>> x:id "ly":str))

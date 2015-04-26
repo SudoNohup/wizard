@@ -41,7 +41,6 @@ in:<lo,<lo,t>>
 
 assign:<e,<e,e>>
 
-equalcmp:<e,<e,e>>
 if:<expr,<block,e>>
 
 div:<e,<e,expr>>
@@ -52,8 +51,14 @@ times:<e,<e,expr>>
 eq:<e,<e,relExpr>>
 gt:<e,<e,relExpr>>
 lt:<e,<e,relExpr>>
+ge:<e,<e,relExpr>>
+le:<e,<e,relExpr>>
 
 ret:<e,jmpStmt>
+
+//function calls
+endsWith:<e,<e,e>>
+startsWith:<e,<e,e>>
 
 
 )

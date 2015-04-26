@@ -17,5 +17,7 @@ i:id
 8:i
 9:i
 
+//string constants
+"ly":str
 
 )

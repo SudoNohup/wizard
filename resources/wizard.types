@@ -14,6 +14,7 @@
 
 //identifier
 (id e)
+(str e)
 (expr e)
 (block e)
 (stmt block)

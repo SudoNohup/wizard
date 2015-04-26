@@ -117,8 +117,8 @@ assign :- (S/PP)/NP : (lambda $0:e (lambda $1:e (assign:<e,<e,e>> $0 $1)))
 with :- PP/NP : (lambda $0:e $0)
 to :- PP\NP : (lambda $0:e $0)
 
-equal to :- (S\NP)/NP : (lambda $0:e (lambda $1:e (equalcmp:<e,<e,e>> $1 $0)))
-equals to :- (S\NP)/NP : (lambda $0:e (lambda $1:e (equalcmp:<e,<e,e>> $1 $0)))
+equal to :- (S\NP)/NP : (lambda $0:e (lambda $1:e (eq:<e,<e,relExpr>> $1 $0)))
+equals to :- (S\NP)/NP : (lambda $0:e (lambda $1:e (eq:<e,<e,relExpr>> $1 $0)))
 if :- (S/S)/S : (lambda $0:e (lambda $1:e (if:<expr,<block,e>> $0 $1)))
 if :- (S\S)/S : (lambda $0:e (lambda $1:e (if:<expr,<block,e>> $0 $1)))
 
@@ -135,6 +135,12 @@ times :- (S\NP)/NP : (lambda $0:e (lambda $1:e (times:<e,<e,expr>> $1 $0)))
 //while statement
 
 //if statement
+
+//APIs
+ends in :- (NP\NP)/NP : (lambda $0:e (lambda $1:e (endsWith:<e,<e,e>> $1 $0)))
+
+//composition rules
+
 
 
 
