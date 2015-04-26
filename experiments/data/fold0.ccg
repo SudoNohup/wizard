@@ -19,5 +19,8 @@ x times 2
 //let r be the remainder of m divide n
 //(assign:<e,<e,e>> r:id (mod:<e,<e,expr>> m:id n:id))
 
+x times by 2
+(times:<e,<e,expr>> x:id 2:i)
 
-
+x plus 2
+(times:<e,<e,expr>> x:id 2:i)

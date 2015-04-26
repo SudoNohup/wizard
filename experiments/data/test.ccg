@@ -1,4 +1,4 @@
-//Return true if the given non-negative number is a multiple of 3 or a multiple of 5.
+//Return true if the given non-negative number x is a multiple of 3 or a multiple of 5.
 
 //Given two int values x and y, return their sum. Unless the two values are the same, then return double their sum.
 
