@@ -1,2 +1,5 @@
 assign 1 to z
 (assign:<e,<e,e>> z:id 1:i)
+
+return z as the result
+(ret:<e,jmpStmt> z:id)

@@ -9,3 +9,10 @@ if x equals to 1 assign x with y
 
 assign x with y if x equals to 1 
 (if:<e,<e,t>> (equalcmp:<e,<e,e>> x:id 1:i)  (assign:<e,<e,e>> x:id y:id) )
+
+return z as the result
+(ret:<e,jmpStmt> z:id)
+
+x times 2
+(times:<e,<e,expr>> x:id 2:i)
+
